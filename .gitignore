@@ -1,0 +1,22 @@
+# Données personnelles : base SQLite, clé Enable Banking, certificats, mot de passe d'accès téléphone
+data/
+
+# Secrets et clés, où qu'ils soient
+*.pem
+*.key
+*.crt
+*.p12
+.env
+.env.*
+
+# Bases de données locales
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+
+# Outils / système
+node_modules/
+.DS_Store
+.claude/
+*.log

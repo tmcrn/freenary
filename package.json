@@ -1,0 +1,34 @@
+{
+  "name": "freenary",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Tableau de bord local de finances personnelles : soldes, mouvements triés, prévisions et statistiques, sans cloud.",
+  "scripts": {
+    "start": "node server.js",
+    "reset-demo": "rm -f data/budget.db data/budget.db-* && node server.js"
+  },
+  "engines": {
+    "node": ">=22.5"
+  },
+  "license": "MIT",
+  "author": "tmcrn",
+  "homepage": "https://github.com/tmcrn/freenary#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tmcrn/freenary.git"
+  },
+  "bugs": {
+    "url": "https://github.com/tmcrn/freenary/issues"
+  },
+  "keywords": [
+    "finance",
+    "budget",
+    "dsp2",
+    "open-banking",
+    "enable-banking",
+    "self-hosted",
+    "sqlite",
+    "pea"
+  ]
+}
