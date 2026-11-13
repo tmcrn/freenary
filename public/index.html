@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Freenary</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='10' fill='%2317171A'/><circle cx='22' cy='10' r='4' fill='%23F5B6D7'/><path d='M8 22l5-5 4 3 6-7' stroke='%23F7D66B' stroke-width='2.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="apple-touch-icon" href="/icon-180.png">
+  <meta name="theme-color" content="#F6F0E4">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Freenary">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <div class="app">
+    <nav class="sidebar">
+      <a class="brand" href="#/dashboard">freenary<i></i></a>
+
+      <div class="nav-group">Général</div>
+      <a href="#/dashboard" data-route="dashboard" title="Tableau de bord" aria-label="Tableau de bord"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="7" height="7" rx="2"/><rect x="13" y="4" width="7" height="7" rx="2"/><rect x="4" y="13" width="7" height="7" rx="2"/><rect x="13" y="13" width="7" height="7" rx="2"/></svg>Tableau de bord</a>
+      <a href="#/transactions" data-route="transactions" title="Mouvements" aria-label="Mouvements"><svg viewBox="0 0 24 24"><path d="M5 7h14M5 12h14M5 17h9"/></svg>Mouvements</a>
+      <a href="#/forecast" data-route="forecast" title="Prévisions" aria-label="Prévisions"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="3"/><path d="M8 3v4M16 3v4M4 10h16"/></svg>Prévisions</a>
+      <a href="#/stats" data-route="stats" title="Statistiques" aria-label="Statistiques"><svg viewBox="0 0 24 24"><path d="M6 19V11M12 19V5M18 19v-6"/></svg>Statistiques</a>
+
+      <div class="nav-group">Outils</div>
+      <a href="#/settings" data-route="settings" title="Banques & réglages" aria-label="Banques & réglages"><svg viewBox="0 0 24 24"><path d="M4 10l8-5 8 5M6 10v8M10 10v8M14 10v8M18 10v8M4 20h16"/></svg>Banques & réglages</a>
+      <button class="nav-btn" data-act="import" title="Importer un CSV" aria-label="Importer un CSV"><svg viewBox="0 0 24 24"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg>Importer un CSV</button>
+      <button class="nav-btn" data-act="add-recurring" title="Prévoir un mouvement" aria-label="Prévoir un mouvement"><svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>Prévoir un mouvement</button>
+
+      <span class="nav-spacer"></span>
+      <div class="nav-foot"><b>Tout reste sur ce Mac</b>Aucune donnée ne part ailleurs, sauf vers ta banque.</div>
+    </nav>
+
+    <main class="main">
+      <header class="topbar">
+        <label class="search">
+          <span class="search-ico"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/></svg></span>
+          <input id="search" type="search" placeholder="Rechercher un mouvement…" autocomplete="off">
+        </label>
+        <div class="pill-select">
+          <svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15" rx="3"/><path d="M8 3v4M16 3v4M4 10h16"/></svg>
+          <select id="period" aria-label="Période"></select>
+        </div>
+        <div class="pill-select">
+          <svg viewBox="0 0 24 24"><path d="M4 10l8-5 8 5M6 10v8M10 10v8M14 10v8M18 10v8M4 20h16"/></svg>
+          <select id="account" aria-label="Compte"></select>
+        </div>
+        <button class="round-btn" data-act="sync" title="Synchroniser les banques"><svg viewBox="0 0 24 24"><path d="M20 11a8 8 0 00-14.6-4.5M4 4v4h4M4 13a8 8 0 0014.6 4.5M20 20v-4h-4"/></svg></button>
+      </header>
+      <div id="view" class="view"></div>
+    </main>
+
+    <aside class="rightpanel" id="rightpanel"></aside>
+  </div>
+
+  <div id="popover" class="popover" hidden></div>
+  <div id="modal" class="modal" hidden></div>
+  <div id="toast" class="toast" role="status"></div>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
