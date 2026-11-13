@@ -159,7 +159,7 @@ const page = (title, msg, ok) => `<!doctype html><meta charset="utf-8"><title>${
 
 // Réservé au Mac : gestion de l'accès, connexion bancaire, configuration Enable Banking, effacement de la démo
 const ADMIN_ONLY = /^\/api\/(access|demo\/clear|eb\/(config|auth|complete|callback|sessions|aspsps))(\/|$)/;
-const REMOTE_PUBLIC = new Set(['/cert', '/manifest.webmanifest', '/icon-180.png', '/icon-512.png']); // sans donnée personnelle
+const REMOTE_PUBLIC = new Set(['/cert', '/manifest.webmanifest', '/icon.svg', '/icon-180.png', '/icon-192.png', '/icon-512.png']); // sans donnée personnelle
 
 const loginPage = error => `<!doctype html><html lang="fr"><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#F6F0E4"><title>Freenary</title>

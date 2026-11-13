@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <title>Freenary</title>
+  <!-- Fond plein : iOS applique lui-même le masque arrondi -->
+  <rect width="512" height="512" fill="#1E1C19"/>
+  <!-- Les livres de l'étagère des dépenses : bleu, vert, jaune (le plus haut, avec son marque-page), rose, violet -->
+  <g>
+    <path d="M81 396V207a11 11 0 0 1 11 -11h40a11 11 0 0 1 11 11V396z" fill="#B4C7F0"/>
+    <path d="M153 396V145a11 11 0 0 1 11 -11h40a11 11 0 0 1 11 11V396z" fill="#A9DDBD"/>
+    <path d="M225 396V99a11 11 0 0 1 11 -11h40a11 11 0 0 1 11 11V396z" fill="#F7D66B"/>
+    <path d="M297 396V171a11 11 0 0 1 11 -11h40a11 11 0 0 1 11 11V396z" fill="#F5B6D7"/>
+    <path d="M369 396V217a11 11 0 0 1 11 -11h40a11 11 0 0 1 11 11V396z" fill="#C3B4EA"/>
+  </g>
+  <!-- Reflet et filets sur le dos de chaque livre -->
+  <g fill="#FFFFFF" opacity=".28">
+    <rect x="128" y="208" width="8" height="176" rx="4"/>
+    <rect x="200" y="146" width="8" height="238" rx="4"/>
+    <rect x="272" y="100" width="8" height="284" rx="4"/>
+    <rect x="344" y="172" width="8" height="212" rx="4"/>
+    <rect x="416" y="218" width="8" height="166" rx="4"/>
+  </g>
+  <g fill="#1E1C19" opacity=".22">
+    <rect x="90" y="230" width="44" height="5" rx="2.5"/><rect x="90" y="350" width="44" height="5" rx="2.5"/>
+    <rect x="162" y="168" width="44" height="5" rx="2.5"/><rect x="162" y="350" width="44" height="5" rx="2.5"/>
+    <rect x="234" y="152" width="44" height="5" rx="2.5"/><rect x="234" y="350" width="44" height="5" rx="2.5"/>
+    <rect x="306" y="194" width="44" height="5" rx="2.5"/><rect x="306" y="350" width="44" height="5" rx="2.5"/>
+    <rect x="378" y="240" width="44" height="5" rx="2.5"/><rect x="378" y="350" width="44" height="5" rx="2.5"/>
+  </g>
+  <path d="M263 88h15v46l-7.5 -10 -7.5 10z" fill="#F5B6D7"/>
+  <!-- La planche -->
+  <rect x="69" y="396" width="374" height="26" rx="7" fill="#F6F0E4"/>
+</svg>

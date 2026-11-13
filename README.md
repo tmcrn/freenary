@@ -1,5 +1,7 @@
 <div align="center">
 
+<img src="public/icon.svg" alt="Icône de Freenary : une étagère de livres colorés" width="112">
+
 # freenary
 
 **Tes comptes bancaires, chez toi, sur ton Mac.**
