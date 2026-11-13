@@ -3,6 +3,12 @@
 Toutes les évolutions notables de Freenary sont consignées ici.
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et le projet respecte le [versionnage sémantique](https://semver.org/lang/fr/).
 
+## [0.1.1] - 2026-11-13
+
+### Corrigé
+
+- Connexion depuis le téléphone : Safari envoyait `Origin: null` en validant le formulaire et recevait « Origine invalide ». Cette origine n'est acceptée que si le navigateur confirme que la requête vient de la page elle-même (`Sec-Fetch-Site`). La politique de référent passe à `same-origin`.
+
 ## [0.1.0] - 2026-11-13
 
 Première version publique.
@@ -26,4 +32,5 @@ Première version publique.
 - Accès réseau protégé par mot de passe haché (scrypt), cookie signé et blocage après des essais répétés.
 - Les données personnelles (`data/`) et les secrets sont exclus du dépôt.
 
+[0.1.1]: https://github.com/tmcrn/freenary/releases/tag/v0.1.1
 [0.1.0]: https://github.com/tmcrn/freenary/releases/tag/v0.1.0
