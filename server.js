@@ -99,7 +99,7 @@ const MIME = { '.webmanifest': 'application/manifest+json', '.html': 'text/html;
 const SEC = {
   'content-security-policy': "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data: https://enablebanking.com; connect-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'none'",
   'x-content-type-options': 'nosniff',
-  'referrer-policy': 'no-referrer',
+  'referrer-policy': 'same-origin', // rien n'est envoyé aux autres sites (le code OAuth de la banque ne fuit pas) ; Safari envoie un vrai Origin sur nos formulaires
 };
 const escHtml = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 
@@ -121,9 +121,15 @@ function guard(req, remote) {
   const hosts = remote ? access.remoteHosts(PORT) : new Set([...LOCAL_HOSTS, ...access.remoteHosts(PORT)]);
   if (!hosts.has(String(req.headers.host || '').toLowerCase())) return 'Hôte non autorisé';
   const origin = req.headers.origin;
-  if (origin) { try { if (!hosts.has(new URL(origin).host.toLowerCase())) return 'Origine non autorisée'; } catch { return 'Origine invalide'; } }
+  const site = req.headers['sec-fetch-site'];
+  if (origin === 'null') {
+    // Certains navigateurs (Safari) envoient « Origin: null » pour un formulaire du même site : on n'accepte que si Sec-Fetch-Site le confirme.
+    // Une page tierce (iframe isolée, redirection d'un autre site) envoie « null » avec Sec-Fetch-Site: cross-site : refusée.
+    if (!['same-origin', 'none'].includes(site)) return 'Origine non autorisée';
+  } else if (origin) {
+    try { if (!hosts.has(new URL(origin).host.toLowerCase())) return 'Origine non autorisée'; } catch { return 'Origine invalide'; }
+  }
   if (!['GET', 'HEAD'].includes(req.method)) {
-    const site = req.headers['sec-fetch-site'];
     if (site && !['same-origin', 'none'].includes(site)) return 'Requête inter-sites refusée';
   }
   return null;
