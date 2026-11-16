@@ -250,6 +250,7 @@ const INSTRUCTIONS = [
   'La valeur d’un PEA est soit la dernière valeur liquidative publiée (officielle, avec quelques jours de retard), soit une estimation en direct : précise toujours laquelle tu cites.',
   'Les banques se synchronisent toutes les 6 heures : vérifie bank_connections.last_sync avant d’affirmer qu’un mouvement n’existe pas.',
   'Ces données sont confidentielles : ne cite que ce qui est nécessaire pour répondre. Tu peux analyser, comparer et signaler des anomalies, mais tu n’es pas conseiller financier : pas de recommandation d’achat ou de vente de placements. Réponds en français.',
+  'Si la conversation est vocale : réponds en phrases courtes et naturelles, sans tableau ni liste ni symboles, avec des montants arrondis à l’euro (« environ deux cent quarante euros »), donne d’abord la réponse puis seulement les détails utiles, et propose d’approfondir.',
 ].join('\n');
 
 const SUPPORTED = ['2025-06-18', '2025-03-26', '2024-11-05'];
