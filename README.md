@@ -40,6 +40,7 @@ Les agrégateurs comme Finary sont pratiques, mais ils hébergent tes données b
 | **Livrets et PEA** | Comptes suivis à la main (la DSP2 ne couvre pas l'épargne). Les virements depuis ton compte courant les mettent à jour tout seuls. Un PEA se valorise à partir de ses parts, avec la dernière valeur liquidative officielle ou une estimation en direct. |
 | **Import CSV** | Pour les comptes suivis à la main. |
 | **Sur ton téléphone** | Accès depuis ton Wi-Fi, protégé par mot de passe et HTTPS. Installable sur l'écran d'accueil. |
+| **Demande à Claude** | Un serveur MCP en lecture seule permet à Claude (Desktop ou Code) de consulter tes comptes pour répondre à tes questions. |
 
 <table>
   <tr>
@@ -91,6 +92,46 @@ Désactivé par défaut. Pour l'activer, ouvre *Banques & réglages* **sur le Ma
 
 Le Mac doit être allumé, Freenary lancé, et les deux appareils sur le même réseau. Les actions sensibles (connexion bancaire, clé Enable Banking, gestion de l'accès) restent **réservées au Mac**.
 
+## Interroger tes comptes avec Claude
+
+Freenary embarque un **serveur [MCP](https://modelcontextprotocol.io)** (`mcp/server.js`) : un petit programme que Claude lance sur ton ordinateur et qui lui donne dix outils de **lecture seule**. Tu peux alors ouvrir une conversation et demander « combien ai-je dépensé en restaurants ce trimestre ? », « quand mon compte sera-t-il au plus bas ? » ou « quels abonnements puis-je couper ? ».
+
+| Outil | Ce qu'il apporte |
+|---|---|
+| `get_overview` | Comptes, soldes, total, mois en cours, 12 derniers mois, état des synchronisations |
+| `list_transactions` | Mouvements filtrables (période, compte, catégorie, texte, montant, tri) avec totaux |
+| `spending_by_category`, `monthly_summary`, `top_merchants` | Où va l'argent, mois par mois, marchand par marchand |
+| `balance_history`, `forecast` | Évolution du solde et prévision à 90 jours |
+| `recurring_and_subscriptions` | Charges fixes et abonnements détectés |
+| `get_portfolio` | PEA : parts, valeur officielle et estimée, plus-value |
+| `internal_transfers` | D'où vient et où va l'argent entre tes comptes |
+
+**Installation.** Remplace les chemins par les tiens (`which node` donne celui de Node).
+
+- *Claude Desktop* : *Réglages › Développeur › Modifier la configuration*, puis ajoute dans `claude_desktop_config.json` et redémarre l'application :
+  ```json
+  {
+    "mcpServers": {
+      "freenary": {
+        "command": "/opt/homebrew/bin/node",
+        "args": ["/chemin/vers/freenary/mcp/server.js"]
+      }
+    }
+  }
+  ```
+- *Claude Code* :
+  ```bash
+  claude mcp add freenary --scope user -- node /chemin/vers/freenary/mcp/server.js
+  ```
+
+**À savoir avant de l'activer.**
+
+- Tout ce qu'un outil renvoie **entre dans la conversation, donc chez Anthropic**, comme ce que tu tapes. Les libellés de mouvements peuvent contenir des noms de proches. Si tu ne veux pas ça, ne branche pas le serveur.
+- Le serveur ne fait **aucune écriture** (connexion SQLite en lecture seule), n'utilise **pas le réseau** et n'ouvre jamais la clé Enable Banking, les certificats ni le mot de passe d'accès téléphone.
+- Il lit `data/budget.db` : Freenary doit avoir été lancé au moins une fois. Les données sont celles de la dernière synchronisation.
+- Il fonctionne dans Claude Desktop et Claude Code sur ton ordinateur, **pas** dans l'application mobile ni sur claude.ai : cela exigerait d'exposer tes comptes sur Internet.
+- Pour le retirer : supprime l'entrée `freenary` de la configuration (ou `claude mcp remove freenary`).
+
 ## Confidentialité et sécurité
 
 **Où sont tes données.** Dans le dossier `data/` (ignoré par Git) : la base SQLite, la clé Enable Banking (droits `600`), le certificat local et, si tu l'actives, le condensat de ton mot de passe d'accès téléphone.
@@ -102,6 +143,7 @@ Le Mac doit être allumé, Freenary lancé, et les deux appareils sur le même r
 | API Enable Banking | Récupérer soldes et mouvements | Requêtes signées avec ta clé privée |
 | Yahoo Finance | Cours et valeurs liquidatives d'un PEA | Uniquement des codes ISIN ou tickers |
 | Google Fonts | Polices de l'interface | Ton adresse IP, comme pour tout site qui charge une police |
+| Claude (Anthropic) | Seulement si tu branches le serveur MCP | Ce que renvoient les outils, pendant tes conversations |
 
 **Protections du serveur local.**
 
@@ -135,6 +177,7 @@ lib/enablebanking.js connecteur DSP2 (JWT, consentement, synchronisation)
 lib/portfolio.js     valorisation des PEA (parts, versements, valeur officielle ou en direct)
 lib/quotes.js        cours et valeurs liquidatives
 lib/access.js        accès depuis un autre appareil (mot de passe, session, anti force brute)
+mcp/server.js        serveur MCP en lecture seule pour interroger ses comptes avec Claude
 lib/seed.js          catégories, règles et données de démonstration
 public/              interface (HTML, CSS et JavaScript natifs, graphiques SVG faits main)
 ```

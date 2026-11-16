@@ -20,6 +20,10 @@ Dans une *issue*, une *pull request*, une capture d'écran ou un message de comm
 Pour illustrer un problème, utilise les **données de démonstration** (`npm run reset-demo`).
 Si un secret a fuité, **révoque-le immédiatement** : régénère l'application Enable Banking et change le mot de passe d'accès téléphone.
 
+## Serveur MCP (Claude)
+
+Le serveur `mcp/server.js` est facultatif. Il tourne en local, ouvre la base en **lecture seule** et n'utilise pas le réseau, mais **ce qu'il renvoie à Claude fait partie de la conversation** et est donc traité par Anthropic. Ne le branche qu'à un client en qui tu as confiance, et considère que les libellés de mouvements (noms de proches, commerces) y sont visibles.
+
 ## Modèle de menace
 
 Freenary est conçu pour tourner **sur ta propre machine**, pour un seul utilisateur.
