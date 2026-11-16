@@ -3,6 +3,13 @@
 Toutes les évolutions notables de Freenary sont consignées ici.
 Le format suit [Keep a Changelog](https://keepachangelog.com/fr/1.1.0/) et le projet respecte le [versionnage sémantique](https://semver.org/lang/fr/).
 
+## [0.2.0] - 2026-11-16
+
+### Ajouté
+
+- Serveur MCP en lecture seule (`mcp/server.js`, `npm run mcp`) : Claude Desktop ou Claude Code peut consulter les comptes, mouvements, statistiques, prévisions et PEA pour répondre à des questions sur les finances. Dix outils, aucune écriture, aucun accès réseau, aucun secret exposé.
+- Icône de l'application (étagère de livres) : favicon, écran d'accueil du téléphone, Dock du Mac, manifeste.
+
 ## [0.1.1] - 2026-11-13
 
 ### Corrigé
@@ -32,5 +39,6 @@ Première version publique.
 - Accès réseau protégé par mot de passe haché (scrypt), cookie signé et blocage après des essais répétés.
 - Les données personnelles (`data/`) et les secrets sont exclus du dépôt.
 
+[0.2.0]: https://github.com/tmcrn/freenary/releases/tag/v0.2.0
 [0.1.1]: https://github.com/tmcrn/freenary/releases/tag/v0.1.1
 [0.1.0]: https://github.com/tmcrn/freenary/releases/tag/v0.1.0

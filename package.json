@@ -1,12 +1,13 @@
 {
   "name": "freenary",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "private": true,
   "type": "module",
   "description": "Tableau de bord local de finances personnelles : soldes, mouvements triés, prévisions et statistiques, sans cloud.",
   "scripts": {
     "start": "node server.js",
-    "reset-demo": "rm -f data/budget.db data/budget.db-* && node server.js"
+    "reset-demo": "rm -f data/budget.db data/budget.db-* && node server.js",
+    "mcp": "node mcp/server.js"
   },
   "engines": {
     "node": ">=22.5"
@@ -22,13 +23,16 @@
     "url": "https://github.com/tmcrn/freenary/issues"
   },
   "keywords": [
-    "finance",
     "budget",
+    "claude",
     "dsp2",
-    "open-banking",
     "enable-banking",
+    "finance",
+    "mcp",
+    "model-context-protocol",
+    "open-banking",
+    "pea",
     "self-hosted",
-    "sqlite",
-    "pea"
+    "sqlite"
   ]
 }
